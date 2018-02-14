@@ -1,1 +1,40 @@
-/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/font-awesome/css/font-awesome.min.css";
+@import "../node_modules/primeng/resources/themes/omega/theme.css";
+@import "../node_modules/primeng/resources/primeng.min.css";
+
+body{
+  background-color:#1d283a;
+  color: slategrey;
+}
+
+.home_menu{
+  border-bottom: 1px solid gray;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.ui-menu{
+  height: 650px;
+  margin-left: 10px;
+}
+
+.ui-menuitem .ui-menuitem-link{
+  padding: 10px;
+  background-color:#1d283a;
+  color: slategray;
+}
+
+.task-item{
+  border-bottom: 1px solid grey;
+  background-color:#1d283a;
+  color: slategray;
+}
+
+.ui-widget-header .ui-button, .ui-widget-content .ui-button,
+.ui-widget.ui-button, .ui-button{
+  background-color:slategray;
+  color:#1d283a;
+  border: 1px solid black;
+}

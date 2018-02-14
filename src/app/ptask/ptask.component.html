@@ -1,0 +1,113 @@
+<div class="ui-g task-item">
+    <div class="ui-g-12 ui-md-2">
+        {{task.description}}
+        <span
+          (click)="editable=!editable"
+          class="fa fa-fw fas fa-edit"
+          style="cursor: pointer; color:white"
+          matTooltip="Tooltip!"
+        ></span>
+    </div>
+    <div class="ui-g-16 ui-md-10">
+            <div class="ui-g-2 ui-sm-12">Priority: </div>
+            <div class="ui-g-4 ui-sm-12" *ngIf="!editable">{{task.priority}}</div>
+            <p-dropdown
+              class="ui-g-4 ui-sm-12"
+              [options]="priorities"
+              [(ngModel)]="selectedPriority"
+              *ngIf="editable"
+            >
+            </p-dropdown>
+
+            <div class="ui-g-2 ui-sm-12">Created Date: </div>
+            <div class="ui-g-4 ui-sm-12">{{task.createdDate}}</div>
+
+            <div class="ui-g-2 ui-sm-12"></div>
+            <div class="ui-g-4 ui-sm-12"></div>
+            <div class="ui-g-2 ui-sm-12"></div>
+            <div class="ui-g-4 ui-sm-12"></div>
+
+
+
+            <div class="ui-g-2 ui-sm-12">Dependencies:</div>
+            <div class="ui-g-4 ui-sm-12" *ngIf="!editable">
+              {{task.dependencies}}
+            </div>
+            <input
+            class="ui-g-4 ui-sm-12"
+            type="text"
+            value="{{task.dependencies}}"
+            pInputText
+            *ngIf="editable"
+          />
+            <div class="ui-g-2 ui-sm-12">Created By:  </div>
+            <div class="ui-g-4 ui-sm-12">{{task.createdBy}}</div>
+
+              <div class="ui-g-2 ui-sm-12"></div>
+              <div class="ui-g-4 ui-sm-12"></div>
+              <div class="ui-g-2 ui-sm-12"></div>
+              <div class="ui-g-4 ui-sm-12"></div>
+
+            <div class="ui-g-2 ui-sm-12">Project:</div>
+            <div class="ui-g-4 ui-sm-12" *ngIf="!editable">
+              {{task.projectName}}
+            </div>
+            <input
+              class="ui-g-4 ui-sm-12"
+              type="text"
+              value="{{task.projectName}}"
+              pInputText
+              *ngIf="editable"
+            />
+
+            <div class="ui-g-2 ui-sm-12">Status:</div>
+            <div class="ui-g-4 ui-sm-12" *ngIf="!editable">{{task.status}}</div>
+            <p-dropdown
+              class="ui-g-4 ui-sm-12"
+              [options]="statuses"
+              [(ngModel)]="status"
+              *ngIf="editable"
+            >
+            </p-dropdown>
+            <div class="ui-g-2 ui-sm-12"></div>
+            <div class="ui-g-4 ui-sm-12"></div>
+            <div class="ui-g-2 ui-sm-12"></div>
+            <div class="ui-g-4 ui-sm-12"></div>
+
+            <div class="ui-g-2 ui-sm-12">Owner: </div>
+            <div class="ui-g-4 ui-sm-12" *ngIf="!editable">{{task.owner}}</div>
+            <p-dropdown
+              class="ui-g-4 ui-sm-12"
+              [options]="users"
+              [(ngModel)]="newOwner"
+              *ngIf="editable"
+            >
+            </p-dropdown>
+
+            <div class="ui-g-2 ui-sm-12">Comments: </div>
+            <div class="ui-g-4 ui-sm-12" *ngIf="!editable">{{task.additionalInfo}}</div>
+            <input
+              class="ui-g-4 ui-sm-12"
+              type="text"
+              value="{{task.additionalInfo}}"
+              pInputText
+              *ngIf="editable"
+            />
+
+            <div class="ui-g-2 ui-sm-12" *ngIf="editable"></div>
+            <div class="ui-g-4 ui-sm-12" *ngIf="editable"></div>
+            <div class="ui-g-2 ui-sm-12" *ngIf="editable"></div>
+            <div class="ui-g-4 ui-sm-12" *ngIf="editable"></div>
+
+            <div class="ui-g-2 ui-sm-12" *ngIf="editable"></div>
+            <div class="ui-g-4 ui-sm-12" *ngIf="editable"></div>
+            <div class="ui-g-2 ui-sm-12" *ngIf="editable">
+
+            </div>
+            <div class="ui-g-4 ui-sm-12" *ngIf="editable">
+                <button pButton type="button" (click)="editable=!editable" label="Save" class="ui-button-success"></button>
+                <button pButton type="button" (click)="editable=!editable" label="Cancel"  class="ui-button-danger"></button>
+            </div>
+
+    </div>
+  </div>
