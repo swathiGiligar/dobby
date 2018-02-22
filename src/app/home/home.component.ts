@@ -16,6 +16,8 @@ export class HomeComponent implements OnInit {
   constructor(private pTaskService: PTASKService) { }
 
   ngOnInit() {
+      // this.pTaskService.getTasks().toPromise().then(tasks => this.tasks = tasks);
+
       this.pTaskService.getTasks().then(tasks => this.tasks = tasks);
   }
 }

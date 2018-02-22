@@ -1,4 +1,15 @@
-<div style="margin: 0%">
-    <p-menu [model]="items" ></p-menu>
+<div style="margin: 0%;">
+    <p-menu [model]="items" [style]="{'background-color':'gray'}"></p-menu>
     <!-- <p-panelMenu [model]="items" [style]="{'width':'300px'}" multiple="false"></p-panelMenu> -->
 </div>
+
+<p-dialog
+  header="New Task"
+  [(visible)]="display"
+  modal="true"
+  [width]=450
+  [closable] = "false"
+>
+  <app-task-addition (notify)='onNotify($event)'></app-task-addition>
+</p-dialog>
+

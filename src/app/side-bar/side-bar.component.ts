@@ -10,11 +10,27 @@ export class SideBarComponent implements OnInit {
 
   items: MenuItem[];
 
+  display = false;
+
+  showDialog() {
+    this.display = true;
+  }
+
+  onNotify() {
+    this.display = false;
+  }
+
   ngOnInit() {
     this.items = [
-      {label: 'Active', icon: 'fas fa-hourglass-half'},
-      {label: 'Up for Review', icon: 'fa-eraser'},
-      {label: 'Completed', icon: 'fa-check'}
+      {label: 'Add Task', icon: 'fas fa-plus-square', command: (event) => {
+        console.log('Display:' + this.display);
+        this.showDialog();
+      }},
+      {label: 'My Tasks', icon: 'fas fa-tasks', command: (event) => {
+        console.log('My Tasks');
+      }},
+      {label: 'All Tasks', icon: 'fas fa-tasks'},
+      {label: 'Filters', icon: 'fas fa-filter'}
     ];
   }
 

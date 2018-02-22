@@ -1,0 +1,84 @@
+<div class="ui-g-12">
+    <div class="ui-g-4 ui-sm-6">Description:</div>
+    <div class="ui-g-8 ui-sm-6">
+        <input
+          type="text"
+          [(ngModel)]="desc"
+          pInputText
+          class='input-style'
+          placeholder="Description"
+        >
+    </div>
+
+    <div class="ui-g-4 ui-sm-12">Priority:</div>
+    <div class="ui-g-8 ui-sm-12">
+        <p-dropdown
+        [autoWidth]="false"
+        [options]="priorities"
+        [(ngModel)]="selectedPriority"
+      >
+      </p-dropdown>
+    </div>
+
+    <div class="ui-g-4 ui-sm-12">Owner:</div>
+    <div class="ui-g-8 ui-sm-12">
+        <p-dropdown
+        [autoWidth]="false"
+        [options]="users"
+        [(ngModel)]="newOwner"
+      >
+      </p-dropdown>
+    </div>
+
+    <div class="ui-g-4 ui-sm-12">Project:</div>
+    <div class="ui-g-8 ui-sm-12">
+        <input
+        type="text"
+        [(ngModel)]="project"
+        pInputText
+        placeholder="Project"
+        class='input-style'
+      >
+    </div>
+
+    <div class="ui-g-4 ui-sm-12">Dependencies:</div>
+    <div class="ui-g-8 ui-sm-12">
+        <input
+        type="text"
+        [(ngModel)]="depend"
+        pInputText
+        placeholder="Dependencies"
+        class='input-style'
+      >
+    </div>
+
+    <div class="ui-g-4 ui-sm-12">Comments:</div>
+    <div class="ui-g-8 ui-sm-12">
+        <textarea
+          pInputTextarea
+          [(ngModel)]="comments"
+          placeholder="Additional Information"
+        ></textarea>
+    </div>
+
+    <div class="ui-g-4 ui-sm-12">
+        <button
+        pButton
+        type="button"
+        label="Save"
+        class="ui-button-success label-style"
+        (click)="onSave();"
+      ></button>
+    </div>
+    <div class="ui-g-8 ui-sm-12">
+        <button
+        pButton
+        type="button"
+        label="Cancel"
+        class="ui-button-danger label-style"
+        (click)="onCancel();"
+      ></button>
+    </div>
+</div>
+
+

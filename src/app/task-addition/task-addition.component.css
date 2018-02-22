@@ -1,0 +1,23 @@
+.label-style {
+  min-width: 5.5em;
+  text-align: left;
+  margin-right: 10px;
+  margin-left: 10px;
+  border-radius: 3px;
+  border-color: #d6d6d6;
+  background-color: #f0f0f0;
+  color: #222222;
+}
+
+
+.input-style {
+  max-width: 25em;
+  border-radius: 3px;
+  color: #222222;
+}
+
+.overlay-style {
+  margin: 20px;
+  text-align: center;
+}
+

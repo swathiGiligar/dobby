@@ -1,14 +1,21 @@
 <div class="ui-g task-item">
     <div class="ui-g-12 ui-md-2">
-        {{task.description}}
         <span
           (click)="editable=!editable"
           class="fa fa-fw fas fa-edit"
           style="cursor: pointer; color:white"
-          matTooltip="Tooltip!"
+          *ngIf="!editable"
+          title="Edit"
         ></span>
+        <span *ngIf="!editable">{{task.description}}</span>
+        <input
+          type="text"
+          value="{{task.description}}"
+          pInputText
+          *ngIf="editable"
+        />
     </div>
-    <div class="ui-g-16 ui-md-10">
+    <div class="ui-g-12 ui-md-10">
             <div class="ui-g-2 ui-sm-12">Priority: </div>
             <div class="ui-g-4 ui-sm-12" *ngIf="!editable">{{task.priority}}</div>
             <p-dropdown
@@ -39,7 +46,7 @@
             value="{{task.dependencies}}"
             pInputText
             *ngIf="editable"
-          />
+             />
             <div class="ui-g-2 ui-sm-12">Created By:  </div>
             <div class="ui-g-4 ui-sm-12">{{task.createdBy}}</div>
 
