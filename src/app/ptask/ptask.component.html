@@ -13,6 +13,7 @@
           value="{{task.description}}"
           pInputText
           *ngIf="editable"
+          [(ngModel)]="desc"
         />
     </div>
     <div class="ui-g-12 ui-md-10">
@@ -37,7 +38,10 @@
 
 
             <div class="ui-g-2 ui-sm-12">Dependencies:</div>
-            <div class="ui-g-4 ui-sm-12" *ngIf="!editable">
+            <div
+              class="ui-g-4 ui-sm-12"
+              *ngIf="!editable"
+            >
               {{task.dependencies}}
             </div>
             <input
@@ -46,6 +50,7 @@
             value="{{task.dependencies}}"
             pInputText
             *ngIf="editable"
+            [(ngModel)]="depend"
              />
             <div class="ui-g-2 ui-sm-12">Created By:  </div>
             <div class="ui-g-4 ui-sm-12">{{task.createdBy}}</div>
@@ -56,7 +61,9 @@
               <div class="ui-g-4 ui-sm-12"></div>
 
             <div class="ui-g-2 ui-sm-12">Project:</div>
-            <div class="ui-g-4 ui-sm-12" *ngIf="!editable">
+            <div
+              class="ui-g-4 ui-sm-12"
+              *ngIf="!editable">
               {{task.projectName}}
             </div>
             <input
@@ -65,6 +72,7 @@
               value="{{task.projectName}}"
               pInputText
               *ngIf="editable"
+              [(ngModel)]="project"
             />
 
             <div class="ui-g-2 ui-sm-12">Status:</div>
@@ -99,6 +107,7 @@
               value="{{task.additionalInfo}}"
               pInputText
               *ngIf="editable"
+              [(ngModel)]="comments"
             />
 
             <div class="ui-g-2 ui-sm-12" *ngIf="editable"></div>
@@ -112,8 +121,8 @@
 
             </div>
             <div class="ui-g-4 ui-sm-12" *ngIf="editable">
-                <button pButton type="button" (click)="editable=!editable" label="Save" class="ui-button-success"></button>
-                <button pButton type="button" (click)="editable=!editable" label="Cancel"  class="ui-button-danger"></button>
+                <button pButton type="button" (click)="updateTask()" label="Save" class="ui-button-success"></button>
+                <button pButton type="button" (click)="onCancel()" label="Cancel"  class="ui-button-danger"></button>
             </div>
 
     </div>

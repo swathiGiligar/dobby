@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PTASKService } from '../ptask/ptask.service';
 import { PTASK } from '../ptask/ptask.interface';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -15,9 +16,11 @@ export class HomeComponent implements OnInit {
 
   constructor(private pTaskService: PTASKService) { }
 
-  ngOnInit() {
-      // this.pTaskService.getTasks().toPromise().then(tasks => this.tasks = tasks);
+  displayAllTasks() {
+    this.pTaskService.getTasks().subscribe(res => this.tasks = res);
+  }
 
-      this.pTaskService.getTasks().then(tasks => this.tasks = tasks);
+  ngOnInit() {
+      this.displayAllTasks();
   }
 }

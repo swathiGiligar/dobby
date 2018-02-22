@@ -1,22 +1,34 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Http, Response} from '@angular/http';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { PTASK } from './ptask.interface';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class PTASKService {
 
-    // constructor(private http: HttpClient ) {}
-    constructor(private http: Http ) {}
+  constructor(private http: HttpClient) { }
 
-    getTasks() {
+  getTasks() {
+    return this.http.get<PTASK[]>('http://localhost:8080/tasks');
+  }
 
-        // console.log('Swathis:' + this.http.get<PTASK[]>('http://localhost:8080/tasks'));
-        // return this.http.get<PTASK[]>('http://localhost:8080/tasks');
-        return this.http.get('assets/data/tasks.json')
-                    .toPromise()
-                    .then(res => <PTASK[]> res.json().data)
-                    .then(data => data);
+  createTask(task: PTASK) {
+    const newTask = JSON.stringify(task);
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    this.http.post('http://localhost:8080/tasks', newTask, httpOptions)
+      .subscribe((res => console.log(res)));
+  }
 
-    }
+  updateTask(task: PTASK) {
+    const updatedTask = JSON.stringify(task);
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    this.http.put('http://localhost:8080/tasks', updatedTask, httpOptions)
+      .subscribe((res => console.log(res)));
+  }
 }

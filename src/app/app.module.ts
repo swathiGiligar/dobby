@@ -17,6 +17,8 @@ import {InputTextModule} from 'primeng/inputtext';
 import {CalendarModule} from 'primeng/calendar';
 import {DialogModule} from 'primeng/dialog';
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import {GrowlModule} from 'primeng/growl';
+import {MessageService} from 'primeng/components/common/messageservice';
 
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material';
@@ -55,6 +57,7 @@ import { TaskAdditionComponent } from './task-addition/task-addition.component';
     CalendarModule,
     DialogModule,
     InputTextareaModule,
+    GrowlModule,
 
     MatFormFieldModule,
     MatInputModule,
@@ -62,6 +65,7 @@ import { TaskAdditionComponent } from './task-addition/task-addition.component';
   ],
   providers: [
     PTASKService,
+    MessageService,
   ],
   bootstrap: [AppComponent]
 })

@@ -4,47 +4,44 @@ export class Options {
   getPriorities() {
     return [
             {label: 'Select Priority', value: null},
-            {label: 'Critical', value: {id: '1', level: 'Critical'}},
-            {label: 'High', value: {id: '2', level: 'High'}},
-            {label: 'Medium', value: {id: '3', level: 'Medium'}},
-            {label: 'Low', value: {id: '4', level: 'Low'}}
+            {label: 'Critical', value: {level: 'Critical'}},
+            {label: 'High', value: {level: 'High'}},
+            {label: 'Medium', value: {level: 'Medium'}},
+            {label: 'Low', value: {level: 'Low'}}
         ];
   }
 
   getUsers() {
     return [
       {label: 'Select Owner', value: null},
-      {label: 'Swathi', value: {id: '1', userName: 'Swathi'}},
-      {label: 'Varun', value: {id: '2', userName: 'Varun'}}
+      {label: 'Swathi', value: {userName: 'Swathi'}},
+      {label: 'Varun', value: {userName: 'Varun'}}
     ];
   }
 
   getStatuses() {
     return [
       {label: 'Select Status', value: null},
-      {label: 'Pending', value: {id: '1', status: 'Pending'}},
-      {label: 'In Progress', value: {id: '2', status: 'In Progress'}},
-      {label: 'Blocked', value: {id: '3', status: 'Blocked'}},
-      {label: 'Backlogged', value: {id: '4', status: 'Backlogged'}},
-      {label: 'Up for Review', value: {id: '5', status: 'Up for Review'}},
-      {label: 'Completed', value: {id: '6', status: 'Completed'}},
-      {label: 'Cancelled', value: {id: '7', status: 'Cancelled'}},
+      {label: 'Pending', value: {status: 'Pending'}},
+      {label: 'In Progress', value: {status: 'In Progress'}},
+      {label: 'Blocked', value: {status: 'Blocked'}},
+      {label: 'Backlogged', value: {status: 'Backlogged'}},
+      {label: 'Up for Review', value: {status: 'Up for Review'}},
+      {label: 'Completed', value: {status: 'Completed'}},
+      {label: 'Cancelled', value: {status: 'Cancelled'}},
   ];
   }
 
 }
 
 export interface Priority {
-  id?: string;
   level: string;
 }
 
 export interface Users {
-  id?: string;
   userName: string;
 }
 
 export interface Status {
-  id?: string;
   status: string;
 }

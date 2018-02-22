@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {MenuItem} from 'primeng/api';
 
 @Component({
@@ -8,12 +8,19 @@ import {MenuItem} from 'primeng/api';
 })
 export class SideBarComponent implements OnInit {
 
+  @Output() notify: EventEmitter<string> = new EventEmitter<string>();
+
   items: MenuItem[];
 
   display = false;
+  displayUnderConstruction = false;
 
   showDialog() {
     this.display = true;
+  }
+
+  showUnderConstructionMessage() {
+    this.displayUnderConstruction = true;
   }
 
   onNotify() {
@@ -23,14 +30,17 @@ export class SideBarComponent implements OnInit {
   ngOnInit() {
     this.items = [
       {label: 'Add Task', icon: 'fas fa-plus-square', command: (event) => {
-        console.log('Display:' + this.display);
         this.showDialog();
       }},
       {label: 'My Tasks', icon: 'fas fa-tasks', command: (event) => {
-        console.log('My Tasks');
+        this.showUnderConstructionMessage();
       }},
-      {label: 'All Tasks', icon: 'fas fa-tasks'},
-      {label: 'Filters', icon: 'fas fa-filter'}
+      {label: 'All Tasks', icon: 'fas fa-tasks', command: (event) => {
+        this.notify.emit('Show All Tasks');
+      }},
+      {label: 'Filters', icon: 'fas fa-filter', command: (event) => {
+        this.showUnderConstructionMessage();
+      }}
     ];
   }
 

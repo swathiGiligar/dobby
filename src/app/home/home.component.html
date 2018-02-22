@@ -1,6 +1,6 @@
 <div class="ui-g">
     <div class="ui-g-12 ui-md-2 ui-g-nopad">
-        <app-side-bar></app-side-bar>
+        <app-side-bar (notify)='displayAllTasks($event)'></app-side-bar>
     </div>
     <div class="ui-g-12 ui-md-10 ui-g-nopad">
         <p-dataScroller [value]="tasks" [rows]="10">
@@ -14,25 +14,3 @@
     </div>
 
 </div>
-
-
-<!-- <table>
-  <tbody>
-    <tr>
-        <app-side-bar></app-side-bar>
-
-        <td valign='top'>
-          <p-dataScroller [value]="tasks" [rows]="10">
-             <p-header>
-                Scroll Down to Load More
-              </p-header>
-              <ng-template let-task pTemplate="item" let-i="index">
-                <app-ptask [task]="task"></app-ptask>
-              </ng-template>
-          </p-dataScroller>
-        </td>
-    </tr>
-  </tbody>
-</table> -->
-
-
