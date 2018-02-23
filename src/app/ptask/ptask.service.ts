@@ -19,8 +19,7 @@ export class PTASKService {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
-    this.http.post('http://localhost:8080/tasks', newTask, httpOptions)
-      .subscribe((res => console.log(res)));
+    return this.http.post('http://localhost:8080/tasks', newTask, httpOptions);
   }
 
   updateTask(task: PTASK) {
@@ -28,7 +27,6 @@ export class PTASKService {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
-    this.http.put('http://localhost:8080/tasks', updatedTask, httpOptions)
-      .subscribe((res => console.log(res)));
+    return this.http.put('http://localhost:8080/tasks', updatedTask, httpOptions);
   }
 }

@@ -14,13 +14,7 @@ export class AppComponent {
   sub: Subscription;
 
   constructor(private messageService: MessageService) {
-    this.showSuccessMessage();
-  }
-
-  showSuccessMessage() {
     this.sub = this.messageService.messageObserver.subscribe((msg: Message) => {
-      console.log(msg);
-      this.msgs.push(msg);
   });
-}
+  }
 }

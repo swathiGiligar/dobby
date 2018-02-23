@@ -35,9 +35,16 @@ export class PtaskComponent implements OnInit {
     showSuccessMessage() {
       this.messageService.add({
         severity: 'success',
-        summary: 'Service Message',
-        detail: 'Via MessageService'});
-  }
+        summary: 'Task Updated Successfully.'
+      });
+    }
+
+    showErrorMessage() {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error updating task.'
+      });
+    }
 
     ngOnInit() {
       this.setValues();
@@ -74,7 +81,11 @@ export class PtaskComponent implements OnInit {
       taskToUpdate.status = this.status.status;
       taskToUpdate.createdBy = this.task.createdBy;
       taskToUpdate.createdDate = this.task.createdDate;
-      this.pTaskService.updateTask(taskToUpdate);
+
+      this.pTaskService.updateTask(taskToUpdate).subscribe(
+        res => this.showSuccessMessage,
+        error => this.showErrorMessage
+      );
 
       this.editable = false;
 
@@ -85,6 +96,5 @@ export class PtaskComponent implements OnInit {
       this.setValues();
 
       this.editable = false;
-      this.showSuccessMessage();
     }
 }

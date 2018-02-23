@@ -4,6 +4,7 @@ import { Priority, Users, Status, Options } from '../utils/options';
 import { PTASK } from '../ptask/ptask.interface';
 import { PTASKService } from '../ptask/ptask.service';
 import { DatePipe } from '@angular/common';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 @Component({
   selector: 'app-task-addition',
@@ -25,7 +26,8 @@ export class TaskAdditionComponent implements OnInit {
   depend: string;
   comments: string;
 
-  constructor(private pTaskService: PTASKService) { }
+  constructor(private pTaskService: PTASKService,
+    private messageService: MessageService) { }
 
   ngOnInit() {
     this.priorities = this.options.getPriorities();
@@ -34,13 +36,6 @@ export class TaskAdditionComponent implements OnInit {
   }
 
   onSave() {
-    console.log(this.selectedPriority);
-    console.log(this.newOwner);
-    console.log(this.desc);
-    console.log(this.project);
-    console.log(this.depend);
-    console.log(this.comments);
-
     const task = {} as PTASK;
     task.priority = this.selectedPriority.level;
     task.description = this.desc;
@@ -49,24 +44,23 @@ export class TaskAdditionComponent implements OnInit {
     task.projectName = this.project;
     task.dependencies = this.depend;
     task.additionalInfo = this.comments;
-    const pipe = new DatePipe('en-IST'); // Use your own locale
+    const pipe = new DatePipe('en-IST');
     const now = Date.now();
     const currentTime = pipe.transform(now, 'short');
     task.createdDate = currentTime;
-    task.createdBy = 'US';
-    this.pTaskService.createTask(task);
+    task.createdBy = 'US'; // TODO update when user management is implemented.
 
-    this.clearData();
+    this.pTaskService.createTask(task).subscribe(
+      res => this.showSuccessMessage(),
+      error => this.showErrorMessage()
+    );
+
+    this.close();
 
     this.notify.emit('Close Dialog');
   }
 
-  onCancel() {
-    this.clearData();
-    this.notify.emit('Close Dialog');
-  }
-
-  clearData() {
+  close() {
     this.selectedPriority = null;
     this.newOwner = null;
     this.status = null;
@@ -74,6 +68,22 @@ export class TaskAdditionComponent implements OnInit {
     this.project = '';
     this.depend = '';
     this.comments = '';
+
+    this.notify.emit('Close Dialog');
+  }
+
+  showSuccessMessage() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Task Added Successfully.'
+    });
+  }
+
+  showErrorMessage() {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error adding new task.'
+    });
   }
 
 }
