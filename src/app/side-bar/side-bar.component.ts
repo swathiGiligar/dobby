@@ -8,7 +8,8 @@ import {MenuItem} from 'primeng/api';
 })
 export class SideBarComponent implements OnInit {
 
-  @Output() notify: EventEmitter<string> = new EventEmitter<string>();
+  @Output() showAllTasks: EventEmitter<string> = new EventEmitter<string>();
+  @Output() showMyTasks: EventEmitter<string> = new EventEmitter<string>();
 
   items: MenuItem[];
 
@@ -33,10 +34,10 @@ export class SideBarComponent implements OnInit {
         this.showDialog();
       }},
       {label: 'My Tasks', icon: 'fas fa-tasks', command: (event) => {
-        this.showUnderConstructionMessage();
+        this.showMyTasks.emit('Show My Tasks');
       }},
       {label: 'All Tasks', icon: 'fas fa-tasks', command: (event) => {
-        this.notify.emit('Show All Tasks');
+        this.showAllTasks.emit('Show All Tasks');
       }},
       {label: 'Filters', icon: 'fas fa-filter', command: (event) => {
         this.showUnderConstructionMessage();

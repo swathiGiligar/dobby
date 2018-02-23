@@ -20,6 +20,10 @@ export class HomeComponent implements OnInit {
     this.pTaskService.getTasks().subscribe(res => this.tasks = res);
   }
 
+  displayMyTasks() {
+    this.pTaskService.myTasks('Varun').subscribe(res => this.tasks = res);
+  }
+
   ngOnInit() {
       this.displayAllTasks();
   }

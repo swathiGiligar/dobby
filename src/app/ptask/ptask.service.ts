@@ -29,4 +29,8 @@ export class PTASKService {
     };
     return this.http.put('http://localhost:8080/tasks', updatedTask, httpOptions);
   }
+
+  myTasks(user: string) {
+    return this.http.get<PTASK[]>('http://localhost:8080/tasks/users/' + user);
+  }
 }

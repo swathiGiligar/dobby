@@ -1,6 +1,9 @@
 <div class="ui-g">
     <div class="ui-g-12 ui-md-2 ui-g-nopad">
-        <app-side-bar (notify)='displayAllTasks($event)'></app-side-bar>
+        <app-side-bar
+        (showAllTasks)='displayAllTasks($event)'
+        (showMyTasks)='displayMyTasks($event)'
+        ></app-side-bar>
     </div>
     <div class="ui-g-12 ui-md-10 ui-g-nopad">
         <p-dataScroller [value]="tasks" [rows]="10">
