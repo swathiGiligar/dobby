@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Http , HttpModule} from '@angular/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -30,6 +30,16 @@ import { PTASKService} from './ptask/ptask.service';
 import { PtaskComponent } from './ptask/ptask.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { TaskAdditionComponent } from './task-addition/task-addition.component';
+import { LoginComponent } from './login/login.component';
+import { AuthInterceptor } from './auth/auth.interceptor';
+import { AuthService } from './auth/auth.service';
+import { RouterModule, Routes } from '@angular/router';
+import { LayoutComponent } from './layout/layout.component';
+
+const appRoutes: Routes = [
+  { path: '', component: LoginComponent },
+  { path: 'home', component: LayoutComponent },
+];
 
 @NgModule({
   declarations: [
@@ -38,6 +48,8 @@ import { TaskAdditionComponent } from './task-addition/task-addition.component';
     PtaskComponent,
     SideBarComponent,
     TaskAdditionComponent,
+    LoginComponent,
+    LayoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +58,7 @@ import { TaskAdditionComponent } from './task-addition/task-addition.component';
     HttpClientModule,
     HttpModule,
     FormsModule,
+    RouterModule.forRoot(appRoutes),
 
     MenubarModule,
     ButtonModule,
@@ -66,6 +79,12 @@ import { TaskAdditionComponent } from './task-addition/task-addition.component';
   providers: [
     PTASKService,
     MessageService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+  },
+  AuthService,
   ],
   bootstrap: [AppComponent]
 })

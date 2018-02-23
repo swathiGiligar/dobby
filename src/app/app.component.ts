@@ -1,7 +1,4 @@
 import { Component } from '@angular/core';
-import { MessageService } from 'primeng/components/common/messageservice';
-import { Message } from 'primeng/api';
-import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +7,4 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class AppComponent {
   title = 'app';
-  msgs: Message[] = [];
-  sub: Subscription;
-
-  constructor(private messageService: MessageService) {
-    this.sub = this.messageService.messageObserver.subscribe((msg: Message) => {
-  });
-  }
 }

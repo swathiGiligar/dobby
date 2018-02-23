@@ -1,0 +1,29 @@
+<p-growl [(value)]="msgs"></p-growl>
+<table style="width: 100%">
+  <tbody>
+      <tr>
+        <td>
+          <div class='home_menu'>
+              <img
+                #img
+                src="assets/images/logo3.png"
+                alt="Logo"
+              >
+              <div style="float: right;margin-top: 13px; margin-bottom: 50px;">
+                <button
+                  pButton
+                  label="Logout"
+                  icon="fa-sign-out"
+                ></button>
+              </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <app-home></app-home>
+        </td>
+      </tr>
+  </tbody>
+</table>
+

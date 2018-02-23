@@ -1,0 +1,26 @@
+#parent {
+  padding: 7% 0;
+  height: 100%;
+  background-color: #2a4047;
+  overflow: hidden;
+}
+
+.child {
+  padding: 3% 0;
+  width: 100%;
+  padding-left: 40%;
+}
+
+.content {
+  background-color:#817b7b;
+}
+
+.banner {
+  font-size: 86px;
+  color: #d6cfcf;
+  font-family: 'Lobster', cursive;
+}
+
+.error {
+  color: #ec9590;
+}

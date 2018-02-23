@@ -1,0 +1,58 @@
+<div id="parent">
+  <div class="child banner">
+      Sparrow
+  </div>
+  <div class="child content">
+      <table><tbody><tr><td>
+          <div class="ui-inputgroup">
+              <span class="ui-inputgroup-addon">
+                  <i class="fa fa-user"></i>
+              </span>
+              <input
+                  pInputText
+                  style="width: 250px;"
+                  type="text"
+                  name="sparrow-userid"
+                  placeholder="Username"
+                  [(ngModel)]="userID"
+                  (keypress)="onKeyEvent($event)"
+                  [ngModelOptions]="{standalone: true}"
+              >
+          </div>
+      </td></tr>
+      <tr><td>
+          <div class="ui-inputgroup">
+              <span class="ui-inputgroup-addon">
+                  <i class="fa fa-key"></i>
+              </span>
+              <input
+                  pInputText
+                  style="width: 250px;"
+                  type="password"
+                  name="sparrow-password"
+                  placeholder="Password"
+                  [(ngModel)]="password"
+                  (keypress)="onKeyEvent($event)"
+                  [ngModelOptions]="{standalone: true}"
+              >
+          </div>
+      </td></tr>
+      <tr><td style="padding-left: 73%; padding-top: 10px;">
+          <button
+              pButton
+              (click)="login()"
+              type="submit"
+              label="Login"
+          ></button>
+      </td></tr></tbody></table>
+      <!-- Don't have an account? -
+      <a href="#" (click)="showRegisterDialog()"> Register </a> -->
+  </div>
+</div>
+
+<!-- <p-dialog
+  header="Register User"
+  [(visible)]="registerVisible"
+  [modal]=true>
+  <app-user-create></app-user-create>
+</p-dialog> -->
