@@ -10,10 +10,12 @@
                 alt="Logo"
               >
               <div style="float: right;margin-top: 13px; margin-bottom: 50px;">
+                {{loggedInUser}}
                 <button
                   pButton
                   label="Logout"
                   icon="fa-sign-out"
+                  (click)='logout()'
                 ></button>
               </div>
           </div>

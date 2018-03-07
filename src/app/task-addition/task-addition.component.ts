@@ -5,6 +5,7 @@ import { PTASK } from '../ptask/ptask.interface';
 import { PTASKService } from '../ptask/ptask.service';
 import { DatePipe } from '@angular/common';
 import { MessageService } from 'primeng/components/common/messageservice';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-task-addition',
@@ -20,19 +21,25 @@ export class TaskAdditionComponent implements OnInit {
   newOwner: Users;
   statuses: SelectItem[];
   status: Status;
-  options = new Options();
+  options: Options;
   desc: string;
   project: string;
   depend: string;
   comments: string;
 
   constructor(private pTaskService: PTASKService,
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    private auth: AuthService) {}
 
   ngOnInit() {
+    this.options = new Options(this.pTaskService);
     this.priorities = this.options.getPriorities();
     this.users = this.options.getUsers();
     this.statuses = this.options.getStatuses();
+    const currentUser = this.auth.user.firstName + ' ' + this.auth.user.lastName;
+    this.newOwner = {
+      userName: currentUser
+    };
   }
 
   onSave() {
@@ -48,7 +55,7 @@ export class TaskAdditionComponent implements OnInit {
     const now = Date.now();
     const currentTime = pipe.transform(now, 'short');
     task.createdDate = currentTime;
-    task.createdBy = 'US'; // TODO update when user management is implemented.
+    task.createdBy = this.auth.user.email;
 
     this.pTaskService.createTask(task).subscribe(
       res => this.showSuccessMessage(),
@@ -62,12 +69,16 @@ export class TaskAdditionComponent implements OnInit {
 
   close() {
     this.selectedPriority = null;
-    this.newOwner = null;
+    // this.newOwner = null;
     this.status = null;
     this.desc = '';
     this.project = '';
     this.depend = '';
     this.comments = '';
+    const currentUser = this.auth.user.firstName + ' ' + this.auth.user.lastName;
+    this.newOwner = {
+      userName: currentUser
+    };
 
     this.notify.emit('Close Dialog');
   }

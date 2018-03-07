@@ -33,13 +33,14 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
-      this.router.navigate(['/home']);
+      // this.router.navigate(['/home']);
         const cred = {
             userID: this.userID,
             password: this.password,
         };
         this.auth.login(cred).subscribe(
             (resp: any) => {
+                console.log('Welcome' + this.auth.user.firstName);
                 this.router.navigate(['/home']);
             },
             error => {
@@ -66,4 +67,8 @@ export class LoginComponent implements OnInit {
             this.login();
         }
     }
+
+    showRegisterDialog() {
+      this.registerVisible = true;
+  }
 }

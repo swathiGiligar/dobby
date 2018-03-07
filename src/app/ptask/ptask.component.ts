@@ -27,7 +27,7 @@ export class PtaskComponent implements OnInit {
 
     editable = false;
 
-    options = new Options();
+    options = new Options(this.pTaskService);
 
     constructor(private pTaskService: PTASKService,
       private messageService: MessageService) { }
@@ -83,8 +83,8 @@ export class PtaskComponent implements OnInit {
       taskToUpdate.createdDate = this.task.createdDate;
 
       this.pTaskService.updateTask(taskToUpdate).subscribe(
-        res => this.showSuccessMessage,
-        error => this.showErrorMessage
+        res => this.showSuccessMessage(),
+        error => this.showErrorMessage()
       );
 
       this.editable = false;

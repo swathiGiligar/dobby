@@ -1,0 +1,15 @@
+<div id="parent">
+    <div class="child banner">
+        Sparrow
+    </div>
+    <div class="child content">
+        <span class="message"> Verify User Account </span>
+        {{verifyID}}
+        <app-password
+            [mode]="'set'"
+            [userID]="userID"
+            (onSubmit)="verify($event)"
+        ></app-password>
+    </div>
+</div>
+

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PTASKService } from '../ptask/ptask.service';
 import { PTASK } from '../ptask/ptask.interface';
 import { DatePipe } from '@angular/common';
+import { AuthService } from '../auth/auth.service';
 
 
 @Component({
@@ -14,14 +15,16 @@ export class HomeComponent implements OnInit {
 
   tasks: PTASK[];
 
-  constructor(private pTaskService: PTASKService) { }
+  constructor(private pTaskService: PTASKService,
+    private auth: AuthService) { }
 
   displayAllTasks() {
     this.pTaskService.getTasks().subscribe(res => this.tasks = res);
   }
 
   displayMyTasks() {
-    this.pTaskService.myTasks('Varun').subscribe(res => this.tasks = res);
+    const user = this.auth.user.firstName + ' ' + this.auth.user.lastName;
+    this.pTaskService.myTasks(user).subscribe(res => this.tasks = res);
   }
 
   ngOnInit() {

@@ -1,6 +1,6 @@
 <div id="parent">
   <div class="child banner">
-      Sparrow
+     <span style='color:red'>P</span>TASKS
   </div>
   <div class="child content">
       <table><tbody><tr><td>
@@ -43,6 +43,8 @@
               (click)="login()"
               type="submit"
               label="Login"
+              icon="fa-sign-in"
+              style="background-color:#1d283a;color:slategray;"
           ></button>
       </td></tr></tbody></table>
       <!-- Don't have an account? -
@@ -50,9 +52,9 @@
   </div>
 </div>
 
-<!-- <p-dialog
+<p-dialog
   header="Register User"
   [(visible)]="registerVisible"
   [modal]=true>
   <app-user-create></app-user-create>
-</p-dialog> -->
+</p-dialog>

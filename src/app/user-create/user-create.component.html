@@ -1,0 +1,121 @@
+<table class="ucp"><tbody>
+    <form #f="ngForm" (ngSubmit)="createUser(f)">
+            <ng-container *ngIf="mode === 'create'">
+                <tr>
+                    <td>Access Level</td>
+                    <td>
+                        <p-dropdown
+                            [style]="{'width': '250px'}"
+                            name="auth"
+                            [options]="AUTH_LEVELS_ITEMS"
+                            ngModel
+                        ></p-dropdown>
+                    </td>
+                </tr>
+            </ng-container>
+        <!-- <ng-container *ngIf="mode === 'create'">
+            <tr>
+                <td>User ID*</td>
+                <td>
+                    <input
+                        required
+                        minlength="3"
+                        maxlength="10"
+                        class="form-control input-text"
+                        pInputText
+                        type="text"
+                        name="id"
+                        (onblur)="checkAvailability(f)"
+                        ngModel
+                    >
+                </td>
+            </tr>
+        </ng-container> -->
+        <tr>
+            <td>E-Mail*</td>
+            <td>
+                <input
+                    required
+                    class="form-control input-text"
+                    pInputText
+                    type="email"
+                    name="email"
+                    ngModel
+                    email
+                >
+            </td>
+        </tr>
+        <tr>
+            <td>First Name*</td>
+            <td>
+                <input
+                    required
+                    class="form-control input-text"
+                    pInputText
+                    type="text"
+                    name="firstName"
+                    ngModel
+                >
+            </td>
+        </tr>
+        <tr>
+            <td>Last Name*</td>
+            <td>
+                <input
+                    required
+                    class="form-control input-text"
+                    pInputText
+                    type="text"
+                    name="lastName"
+                    ngModel
+                >
+            </td>
+        </tr>
+        <ng-container *ngIf="mode === 'register'">
+            <tr>
+                <td>Password*</td>
+                <td>
+                    <input
+                        required
+                        class="form-control input-text"
+                        pInputText
+                        type="password"
+                        name="password"
+                        [ngModelOptions]="{standalone: true}"
+                        [(ngModel)]="password"
+                        ngModel
+                    >
+                </td>
+            </tr>
+            <tr>
+                <td>Confirm Password*</td>
+                <td>
+                    <input
+                        required
+                        class="form-control input-text"
+                        pInputText
+                        type="password"
+                        name="confirm"
+                        [ngModelOptions]="{standalone: true}"
+                        [(ngModel)]="confirm"
+                    >
+                </td>
+            </tr>
+        </ng-container>
+        <tr>
+            <td></td>
+            <td>
+                <button
+                    [disabled]="f.invalid
+                        || (mode === 'register' && !passwordValid())"
+                    pButton
+                    submit
+                    style="float: right;"
+                    type="submit"
+                    label="Submit"
+                >
+                </button>
+            </td>
+        </tr>
+    </form>
+</tbody></table>

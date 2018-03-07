@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Http , HttpModule} from '@angular/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { JwtModule } from '@auth0/angular-jwt';
 
 import {ContextMenuModule} from 'primeng/contextmenu';
 import {MenubarModule} from 'primeng/menubar';
@@ -35,6 +36,10 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { AuthService } from './auth/auth.service';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
+import {PasswordComponent} from './password/password.component';
+import {UserCreateComponent} from './user-create/user-create.component';
+import { SecurityService } from './auth/security.service';
+import { VerifyAccountComponent } from './verify-account/verify-account.component';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },
@@ -50,6 +55,9 @@ const appRoutes: Routes = [
     TaskAdditionComponent,
     LoginComponent,
     LayoutComponent,
+    PasswordComponent,
+    UserCreateComponent,
+    VerifyAccountComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,6 +67,12 @@ const appRoutes: Routes = [
     HttpModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
+    JwtModule.forRoot({
+      config: {
+          tokenGetter: tokenGetter,
+          whitelistedDomains: ['localhost:4200']
+      },
+              }),
 
     MenubarModule,
     ButtonModule,
@@ -85,7 +99,12 @@ const appRoutes: Routes = [
       multi: true,
   },
   AuthService,
+  SecurityService,
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+function tokenGetter() {
+  return localStorage.getItem('token');
+}
