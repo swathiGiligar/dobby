@@ -52,7 +52,14 @@ export class PtaskComponent implements OnInit {
 
     setValues() {
       this.priorities = this.options.getPriorities();
-      this.users = this.options.getUsers();
+      const allUsers = this.pTaskService.getAllUsers();
+      allUsers.subscribe(
+      res => {
+        if (res.total > 0) {
+            this.users = this.options.getUsers(res);
+          }
+        }
+      );
       this.statuses = this.options.getStatuses();
       this.desc = this.task.description;
       this.depend = this.task.dependencies;

@@ -6,6 +6,7 @@
         ></app-side-bar>
     </div>
     <div class="ui-g-12 ui-md-10 ui-g-nopad">
+        <div [hidden]="!progressBar"><p-progressBar mode="indeterminate"></p-progressBar></div>
         <p-dataScroller [value]="tasks" [rows]="10">
             <p-header>
                Scroll Down to Load More

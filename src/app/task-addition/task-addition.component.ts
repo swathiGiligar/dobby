@@ -34,12 +34,19 @@ export class TaskAdditionComponent implements OnInit {
   ngOnInit() {
     this.options = new Options(this.pTaskService);
     this.priorities = this.options.getPriorities();
-    this.users = this.options.getUsers();
     this.statuses = this.options.getStatuses();
-    const currentUser = this.auth.user.firstName + ' ' + this.auth.user.lastName;
-    this.newOwner = {
-      userName: currentUser
-    };
+    const allUsers = this.pTaskService.getAllUsers();
+    allUsers.subscribe(
+      res => {
+        if (res.total > 0) {
+            this.users = this.options.getUsers(res);
+            const currentUser = this.auth.user.firstName + ' ' + this.auth.user.lastName;
+            this.newOwner = {
+              userName: currentUser
+            };
+          }
+        }
+      );
   }
 
   onSave() {

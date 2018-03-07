@@ -14,20 +14,29 @@ export class HomeComponent implements OnInit {
 
 
   tasks: PTASK[];
+  progressBar = false;
 
   constructor(private pTaskService: PTASKService,
     private auth: AuthService) { }
 
   displayAllTasks() {
-    this.pTaskService.getTasks().subscribe(res => this.tasks = res);
+    this.progressBar = true;
+    this.pTaskService.getTasks().subscribe(res => {
+      this.tasks = res;
+      this.progressBar = false;
+    });
   }
 
   displayMyTasks() {
+    this.progressBar = true;
     const user = this.auth.user.firstName + ' ' + this.auth.user.lastName;
-    this.pTaskService.myTasks(user).subscribe(res => this.tasks = res);
+    this.pTaskService.myTasks(user).subscribe(res => {
+      this.tasks = res;
+      this.progressBar = false;
+    });
   }
 
   ngOnInit() {
-      this.displayAllTasks();
+    this.displayAllTasks();
   }
 }

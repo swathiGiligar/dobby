@@ -19,23 +19,15 @@ export class Options {
         ];
   }
 
-  getUsers() {
+  getUsers(res) {
     const usrs: UsersOptions [] = [];
-    const allUsers = this.ptaskService.getAllUsers();
-    allUsers.subscribe(
-      res => {
-        if (res.total > 0) {
-          for (const user of res.data) {
-            // const option: UsersOptions = <UsersOptions>{};
-            const option = {
-              label: user.firstName + ' ' + user.lastName,
-              value: {userName: user.firstName + ' ' + user.lastName}
-            };
-            usrs.push(option);
-          }
-        }
-      }
-    );
+    for (const user of res.data) {
+      const option = {
+        label: user.firstName + ' ' + user.lastName,
+        value: {userName: user.firstName + ' ' + user.lastName}
+      };
+      usrs.push(option);
+    }
     return usrs;
     // return [
     //   {label: 'Select Owner', value: null},
