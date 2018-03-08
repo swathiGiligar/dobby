@@ -1,5 +1,8 @@
+<form [formGroup]="taskAdditionForm" (ngSubmit)="onSave(taskAdditionForm.value)">
 <div class="ui-g-12">
-    <div class="ui-g-4 ui-sm-6">Description:</div>
+    <div class="ui-g-4 ui-sm-6">Description:
+      <span style="color:red">*</span>
+    </div>
     <div class="ui-g-8 ui-sm-6">
         <input
           type="text"
@@ -7,10 +10,13 @@
           pInputText
           class='input-style'
           placeholder="Description"
+          formControlName="desc"
         >
     </div>
 
-    <div class="ui-g-4 ui-sm-12">Priority:</div>
+    <div class="ui-g-4 ui-sm-12">Priority:
+        <span style="color:red">*</span>
+    </div>
     <div class="ui-g-8 ui-sm-12">
         <p-dropdown
         [autoWidth]="false"
@@ -18,11 +24,14 @@
         [(ngModel)]="selectedPriority"
         [style]="{'width': '190px'}"
         placeholder='Select Priority'
+        formControlName="selectedPriority"
       >
       </p-dropdown>
     </div>
 
-    <div class="ui-g-4 ui-sm-12">Owner:</div>
+    <div class="ui-g-4 ui-sm-12">Owner:
+        <span style="color:red">*</span>
+    </div>
     <div class="ui-g-8 ui-sm-12">
         <p-dropdown
         [autoWidth]="false"
@@ -30,11 +39,14 @@
         [(ngModel)]="newOwner"
         [style]="{'width': '190px'}"
         placeholder='Select Owner'
+        formControlName="newOwner"
       >
       </p-dropdown>
     </div>
 
-    <div class="ui-g-4 ui-sm-12">Project:</div>
+    <div class="ui-g-4 ui-sm-12">Project:
+        <span style="color:red">*</span>
+    </div>
     <div class="ui-g-8 ui-sm-12">
         <input
         type="text"
@@ -42,6 +54,7 @@
         pInputText
         placeholder="Project"
         class='input-style'
+        formControlName="project"
       >
     </div>
 
@@ -53,6 +66,7 @@
         pInputText
         placeholder="Dependencies"
         class='input-style'
+        formControlName="depend"
       >
     </div>
 
@@ -62,16 +76,17 @@
           pInputTextarea
           [(ngModel)]="comments"
           placeholder="Additional Information"
+          formControlName="comments"
         ></textarea>
     </div>
 
     <div class="ui-g-4 ui-sm-12">
         <button
         pButton
-        type="button"
+        type="submit"
         label="Save"
         class="ui-button-success label-style"
-        (click)="onSave();"
+        [disabled]="!taskAdditionForm.valid"
       ></button>
     </div>
     <div class="ui-g-8 ui-sm-12">
@@ -84,5 +99,4 @@
       ></button>
     </div>
 </div>
-
-
+</form>

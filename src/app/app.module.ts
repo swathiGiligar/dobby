@@ -100,6 +100,9 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [
     PTASKService,

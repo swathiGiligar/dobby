@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {Validators, FormControl, FormGroup, FormBuilder} from '@angular/forms';
 import {SelectItem} from 'primeng/api';
 import { Priority, Users, Status, Options } from '../utils/options';
 import { PTASK } from '../ptask/ptask.interface';
@@ -27,11 +28,14 @@ export class TaskAdditionComponent implements OnInit {
   depend: string;
   comments: string;
   currentUser: string;
+  taskAdditionForm: FormGroup;
 
   constructor(private pTaskService: PTASKService,
-    private messageService: MessageService,
-    private auth: AuthService) {
+              private messageService: MessageService,
+              private auth: AuthService,
+              private fb: FormBuilder) {
       this.currentUser = this.auth.user.firstName + ' ' + this.auth.user.lastName;
+      this.createFormGroup();
     }
 
   ngOnInit() {
@@ -49,6 +53,17 @@ export class TaskAdditionComponent implements OnInit {
           }
         }
       );
+  }
+
+  createFormGroup() {
+    this.taskAdditionForm = this.fb.group({
+      'desc': new FormControl('', Validators.required),
+      'project': new FormControl('', Validators.required),
+      'newOwner': new FormControl('', Validators.required),
+      'selectedPriority': new FormControl('', Validators.required),
+      'depend': new FormControl(''),
+      'comments': new FormControl('')
+    });
   }
 
   onSave() {

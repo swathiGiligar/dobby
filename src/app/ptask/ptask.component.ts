@@ -4,6 +4,7 @@ import { PTASKService } from './ptask.service';
 import {SelectItem} from 'primeng/api';
 import { Options, Priority, Users, Status } from '../utils/options';
 import { MessageService } from 'primeng/components/common/messageservice';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-ptask',
@@ -29,8 +30,21 @@ export class PtaskComponent implements OnInit {
 
     options = new Options();
 
+    updateForm: FormGroup;
+
     constructor(private pTaskService: PTASKService,
-      private messageService: MessageService) { }
+      private messageService: MessageService,
+      private fb: FormBuilder) {
+          this.updateForm = this.fb.group({
+            'desc': new FormControl('', Validators.required),
+            'project': new FormControl('', Validators.required),
+            'newOwner': new FormControl('', Validators.required),
+            'selectedPriority': new FormControl('', Validators.required),
+            'depend': new FormControl(''),
+            'comments': new FormControl(''),
+            'status': new FormControl('', Validators.required)
+          });
+      }
 
     showSuccessMessage() {
       this.messageService.add({

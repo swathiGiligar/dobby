@@ -1,11 +1,12 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import {MenuItem} from 'primeng/api';
 import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-side-bar',
   templateUrl: './side-bar.component.html',
-  styleUrls: ['./side-bar.component.css']
+  styleUrls: ['./side-bar.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class SideBarComponent implements OnInit {
 
@@ -35,7 +36,10 @@ export class SideBarComponent implements OnInit {
 
   ngOnInit() {
     this.items = [
-      {label: 'Add Task', icon: 'fas fa-plus-square', command: (event) => {
+      {
+        label: 'Add Task',
+        icon: 'fas fa-plus-square',
+        command: (event) => {
         this.showDialog();
       }},
       {label: 'My Tasks', icon: 'fas fa-tasks', command: (event) => {
