@@ -26,13 +26,16 @@ export class TaskAdditionComponent implements OnInit {
   project: string;
   depend: string;
   comments: string;
+  currentUser: string;
 
   constructor(private pTaskService: PTASKService,
     private messageService: MessageService,
-    private auth: AuthService) {}
+    private auth: AuthService) {
+      this.currentUser = this.auth.user.firstName + ' ' + this.auth.user.lastName;
+    }
 
   ngOnInit() {
-    this.options = new Options(this.pTaskService);
+    this.options = new Options();
     this.priorities = this.options.getPriorities();
     this.statuses = this.options.getStatuses();
     const allUsers = this.pTaskService.getAllUsers();
@@ -40,9 +43,8 @@ export class TaskAdditionComponent implements OnInit {
       res => {
         if (res.total > 0) {
             this.users = this.options.getUsers(res);
-            const currentUser = this.auth.user.firstName + ' ' + this.auth.user.lastName;
             this.newOwner = {
-              userName: currentUser
+              userName: this.currentUser
             };
           }
         }
@@ -50,6 +52,19 @@ export class TaskAdditionComponent implements OnInit {
   }
 
   onSave() {
+    const task = this.getNewTaskData();
+
+    this.pTaskService.createTask(task).subscribe(
+      res =>  this.showSuccessMessage(),
+      error =>  this.showErrorMessage(),
+      () => {
+            this.close();
+            this.notify.emit('Close Dialog');
+          }
+    );
+  }
+
+  private getNewTaskData() {
     const task = {} as PTASK;
     task.priority = this.selectedPriority.level;
     task.description = this.desc;
@@ -62,21 +77,18 @@ export class TaskAdditionComponent implements OnInit {
     const now = Date.now();
     const currentTime = pipe.transform(now, 'short');
     task.createdDate = currentTime;
-    task.createdBy = this.auth.user.email;
+    task.createdBy = this.currentUser;
+    return task;
+  }
 
-    this.pTaskService.createTask(task).subscribe(
-      res => this.showSuccessMessage(),
-      error => this.showErrorMessage()
-    );
-
-    this.close();
+  close() {
+    this.resetData();
 
     this.notify.emit('Close Dialog');
   }
 
-  close() {
+  private resetData() {
     this.selectedPriority = null;
-    // this.newOwner = null;
     this.status = null;
     this.desc = '';
     this.project = '';
@@ -86,8 +98,6 @@ export class TaskAdditionComponent implements OnInit {
     this.newOwner = {
       userName: currentUser
     };
-
-    this.notify.emit('Close Dialog');
   }
 
   showSuccessMessage() {

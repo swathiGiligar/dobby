@@ -7,11 +7,8 @@ import { PTASKService } from '../ptask/ptask.service';
 
 export class Options {
 
-  constructor(private ptaskService: PTASKService) { }
-
   getPriorities() {
    return [
-            // {label: 'Select Priority', value: null},
             {label: 'Critical', value: {level: 'Critical'}},
             {label: 'High', value: {level: 'High'}},
             {label: 'Medium', value: {level: 'Medium'}},
@@ -29,16 +26,10 @@ export class Options {
       usrs.push(option);
     }
     return usrs;
-    // return [
-    //   {label: 'Select Owner', value: null},
-    //   {label: 'Swathi Giligar', value: {userName: 'Swathi Giligar'}},
-    //   {label: 'Varun Amachi', value: {userName: 'Varun Amachi'}}
-    // ];
   }
 
   getStatuses() {
     return [
-      // {label: 'Select Status', value: null},
       {label: 'Pending', value: {status: 'Pending'}},
       {label: 'In Progress', value: {status: 'In Progress'}},
       {label: 'Blocked', value: {status: 'Blocked'}},

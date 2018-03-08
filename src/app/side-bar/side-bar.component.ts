@@ -26,6 +26,7 @@ export class SideBarComponent implements OnInit {
 
   onNotify() {
     this.display = false;
+    this.showAllTasks.emit('Show All Tasks');
   }
 
   ngOnInit() {

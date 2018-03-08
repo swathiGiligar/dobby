@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit {
         };
         this.auth.login(cred).subscribe(
             (resp: any) => {
-                console.log('Welcome' + this.auth.user.firstName);
                 this.router.navigate(['/home']);
             },
             error => {

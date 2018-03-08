@@ -27,7 +27,7 @@ export class PtaskComponent implements OnInit {
 
     editable = false;
 
-    options = new Options(this.pTaskService);
+    options = new Options();
 
     constructor(private pTaskService: PTASKService,
       private messageService: MessageService) { }
@@ -47,10 +47,10 @@ export class PtaskComponent implements OnInit {
     }
 
     ngOnInit() {
-      this.setValues();
+      this.setInitailValues();
     }
 
-    setValues() {
+    setInitailValues() {
       this.priorities = this.options.getPriorities();
       const allUsers = this.pTaskService.getAllUsers();
       allUsers.subscribe(
@@ -77,30 +77,35 @@ export class PtaskComponent implements OnInit {
     }
 
     updateTask() {
-      const taskToUpdate = {} as PTASK;
-      taskToUpdate.id = this.task.id;
-      taskToUpdate.additionalInfo = this.comments;
-      taskToUpdate.dependencies = this.depend;
-      taskToUpdate.description = this.desc;
-      taskToUpdate.owner = this.newOwner.userName;
-      taskToUpdate.priority = this.selectedPriority.level;
-      taskToUpdate.projectName = this.project;
-      taskToUpdate.status = this.status.status;
-      taskToUpdate.createdBy = this.task.createdBy;
-      taskToUpdate.createdDate = this.task.createdDate;
+      const taskToUpdate = this.getUpdatedData();
 
       this.pTaskService.updateTask(taskToUpdate).subscribe(
-        res => this.showSuccessMessage(),
-        error => this.showErrorMessage()
+        res => {
+          this.showSuccessMessage();
+          this.task = taskToUpdate;
+        },
+        error => this.showErrorMessage(),
+        () => this.editable = false
       );
-
-      this.editable = false;
-
-      this.task = taskToUpdate;
     }
 
+  private getUpdatedData() {
+    const taskToUpdate = {} as PTASK;
+    taskToUpdate.id = this.task.id;
+    taskToUpdate.additionalInfo = this.comments;
+    taskToUpdate.dependencies = this.depend;
+    taskToUpdate.description = this.desc;
+    taskToUpdate.owner = this.newOwner.userName;
+    taskToUpdate.priority = this.selectedPriority.level;
+    taskToUpdate.projectName = this.project;
+    taskToUpdate.status = this.status.status;
+    taskToUpdate.createdBy = this.task.createdBy;
+    taskToUpdate.createdDate = this.task.createdDate;
+    return taskToUpdate;
+  }
+
     onCancel() {
-      this.setValues();
+      this.setInitailValues();
 
       this.editable = false;
     }
