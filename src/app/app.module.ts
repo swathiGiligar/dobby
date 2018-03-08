@@ -20,6 +20,9 @@ import {DialogModule} from 'primeng/dialog';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {GrowlModule} from 'primeng/growl';
 import {MessageService} from 'primeng/components/common/messageservice';
+import {ProgressBarModule} from 'primeng/progressbar';
+import {PaginatorModule} from 'primeng/paginator';
+import {DataTableModule} from 'primeng/datatable';
 
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material';
@@ -40,6 +43,10 @@ import {PasswordComponent} from './password/password.component';
 import {UserCreateComponent} from './user-create/user-create.component';
 import { SecurityService } from './auth/security.service';
 import { VerifyAccountComponent } from './verify-account/verify-account.component';
+import { UsersComponent } from './users/users.component';
+import { FormatService } from './users/format.service';
+import { ConfirmationService } from 'primeng/components/common/confirmationservice';
+import { ObjectDetailService } from './auth/object-detail.service';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },
@@ -58,6 +65,7 @@ const appRoutes: Routes = [
     PasswordComponent,
     UserCreateComponent,
     VerifyAccountComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,6 +93,9 @@ const appRoutes: Routes = [
     DialogModule,
     InputTextareaModule,
     GrowlModule,
+    ProgressBarModule,
+    PaginatorModule,
+    DataTableModule,
 
     MatFormFieldModule,
     MatInputModule,
@@ -100,6 +111,9 @@ const appRoutes: Routes = [
   },
   AuthService,
   SecurityService,
+  FormatService,
+  ConfirmationService,
+  ObjectDetailService,
   ],
   bootstrap: [AppComponent]
 })

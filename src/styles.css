@@ -36,7 +36,8 @@ body{
 }
 
 .ui-widget-header .ui-button, .ui-widget-content .ui-button,
-.ui-widget.ui-button, .ui-button{
+.ui-widget.ui-button, .ui-button
+.ui-datatable .ui-cell-data{
   background-color:slategray;
   color:#1d283a;
   border: 1px solid black;

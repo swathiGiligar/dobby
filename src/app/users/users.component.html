@@ -1,0 +1,89 @@
+<div style="text-align: right; margin-bottom: 2px;">
+    <button
+    pButton
+    icon="fas fa-user-plus"
+    label= "Add New User"
+    (click)="showUserCreationWindow()"
+    ></button>
+</div>
+<div content>
+        <p-paginator
+            [rows]=ENTRIES_PER_PAGE
+            [totalRecords]=total
+            [pageLinkSize]="PAGE_SHOWN"
+            (onPageChange)="paginate($event)"
+        ></p-paginator>
+        <p-dataTable
+            [value]="users"
+            [resizableColumns]="true"
+        >
+            <p-column
+                field="firstName"
+                header="First Name"
+                [style]="{'width':'25%'}"
+            >
+            </p-column>
+            <p-column
+                field="lastName"
+                header="Last Name"
+                [style]="{'width':'25%'}"
+            >
+            </p-column>
+            <p-column
+                field="auth"
+                header="Role"
+                [style]="{'width':'10%'}"
+            >
+                <ng-template
+                    let-col
+                    let-data="rowData"
+                    pTemplate="body">
+                    {{ this.fmtSrv.formatAccess(data.auth) }}
+                </ng-template>
+            </p-column>
+            <p-column
+                field="state"
+                header="Status"
+                [style]="{'width':'10%'}"
+            >
+            </p-column>
+            <p-column
+                field="created"
+                header="Created Date"
+                [style]="{'width':'20%'}"
+            >
+                <ng-template let-col let-data="rowData" pTemplate="body">
+                    {{ this.fmtSrv.formatTime(data.created) }}
+                </ng-template>
+            </p-column>
+            <p-column
+                header="Ops"
+                [style]="{'width':'10%'}"
+            >
+                <ng-template let-col let-data="rowData" pTemplate="body">
+                    <button
+                        [disabled]="data.auth === 0 || data.id === auth.user.id"
+                        pButton
+                        icon="fa-trash"
+                        (click)="deleteUser(data)"
+                    ></button>
+                    <!-- <button
+                        pButton
+                        icon="fa-info"
+                        (click)="showUserDetails(data)"
+                    ></button> -->
+                </ng-template>
+            </p-column>
+        </p-dataTable>
+    </div>
+
+<p-dialog
+    [style]="{'overflow': 'visible'}"
+    header="Create User"
+    [(visible)]="showCreateUserDialog"
+    [modal]=true
+>
+    <app-user-create
+        (onFinished)="onUserCreationDone()"
+    ></app-user-create>
+</p-dialog>

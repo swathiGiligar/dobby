@@ -3,18 +3,19 @@
         <app-side-bar
         (showAllTasks)='displayAllTasks($event)'
         (showMyTasks)='displayMyTasks($event)'
+        (showUserView)='showUserView($event)'
         ></app-side-bar>
     </div>
     <div class="ui-g-12 ui-md-10 ui-g-nopad">
         <div [hidden]="!progressBar"><p-progressBar mode="indeterminate"></p-progressBar></div>
-        <p-dataScroller [value]="tasks" [rows]="10">
+        <div [hidden]="!taskView"><p-dataScroller [value]="tasks" [rows]="10">
             <p-header>
                Scroll Down to Load More
              </p-header>
              <ng-template let-task pTemplate="item" let-i="index">
                <app-ptask [task]="task"></app-ptask>
              </ng-template>
-         </p-dataScroller>
+         </p-dataScroller></div>
+         <div [hidden]="!userView"><app-users></app-users></div>
     </div>
-
 </div>

@@ -53,4 +53,39 @@ export class AuthService {
         this.router.navigate(['/']);
     }
 
+  isSuperUser(): boolean {
+      if (this.user) {
+          return this.user.auth === 0;
+      }
+      return false;
+  }
+
+  isAdminUser(): boolean {
+      if (this.user) {
+          return this.user.auth <= 1;
+      }
+      return false;
+  }
+
+  isNormalUser(): boolean {
+      if (this.user) {
+          return this.user.auth <= 2;
+      }
+      return false;
+  }
+
+  isMonitorUser(): boolean {
+      if (this.user) {
+          return this.user.auth <= 3;
+      }
+      return false;
+  }
+
+  isPublicUser(): boolean {
+      if (this.user) {
+          return this.user.auth <= 4;
+      }
+      return false;
+  }
+
 }

@@ -36,3 +36,10 @@ export enum PasswordSetMode {
     Reset = 'reset',
     ForceReset = 'force'
 }
+
+export enum UserStatus {
+  Verified = 'verified',
+  Active = 'active',
+  Disabled = 'disabled',
+  Flagged = 'flagged',
+}

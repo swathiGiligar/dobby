@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {MenuItem} from 'primeng/api';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -10,11 +11,14 @@ export class SideBarComponent implements OnInit {
 
   @Output() showAllTasks: EventEmitter<string> = new EventEmitter<string>();
   @Output() showMyTasks: EventEmitter<string> = new EventEmitter<string>();
+  @Output() showUserView: EventEmitter<string> = new EventEmitter<string>();
 
   items: MenuItem[];
 
   display = false;
   displayUnderConstruction = false;
+
+  constructor(private auth: AuthService) {}
 
   showDialog() {
     this.display = true;
@@ -42,6 +46,11 @@ export class SideBarComponent implements OnInit {
       }},
       {label: 'Filters', icon: 'fas fa-filter', command: (event) => {
         this.showUnderConstructionMessage();
+      }},
+      {label: 'Manage Users', icon: 'fas fa-user',
+        visible: this.auth.isAdminUser(),
+        command: (event) => {
+        this.showUserView.emit('Show USer View');
       }}
     ];
   }
