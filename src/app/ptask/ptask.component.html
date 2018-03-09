@@ -8,6 +8,13 @@
           *ngIf="!editable"
           title="Edit"
         ></span>
+        <span
+        (click)="confirmDelete()"
+        class="fa fas fa-trash"
+        style="cursor: pointer; color:white"
+        *ngIf="!editable"
+        title="Delete"
+      ></span>
         <span *ngIf="!editable">{{task.description}}</span>
         <input
           type="text"

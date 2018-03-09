@@ -35,6 +35,10 @@ export class PTASKService {
     return this.http.put(this.url, updatedTask, httpOptions);
   }
 
+  deleteTask(id: string) {
+    return this.http.delete(this.url + '/' + id);
+  }
+
   myTasks(user: string) {
     return this.http.get<PTASK[]>(this.url + '/users/' + user);
   }

@@ -23,6 +23,7 @@ import {MessageService} from 'primeng/components/common/messageservice';
 import {ProgressBarModule} from 'primeng/progressbar';
 import {PaginatorModule} from 'primeng/paginator';
 import {DataTableModule} from 'primeng/datatable';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material';
@@ -45,8 +46,8 @@ import { SecurityService } from './auth/security.service';
 import { VerifyAccountComponent } from './verify-account/verify-account.component';
 import { UsersComponent } from './users/users.component';
 import { FormatService } from './users/format.service';
-import { ConfirmationService } from 'primeng/components/common/confirmationservice';
 import { ObjectDetailService } from './auth/object-detail.service';
+import { ConfirmationService } from 'primeng/components/common/confirmationservice';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },
@@ -103,6 +104,7 @@ const appRoutes: Routes = [
 
     ReactiveFormsModule,
     FormsModule,
+    ConfirmDialogModule,
   ],
   providers: [
     PTASKService,

@@ -5,6 +5,7 @@ import {SelectItem} from 'primeng/api';
 import { Options, Priority, Users, Status } from '../utils/options';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { ConfirmationService } from 'primeng/components/common/confirmationservice';
 
 @Component({
   selector: 'app-ptask',
@@ -14,6 +15,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 export class PtaskComponent implements OnInit {
 
     @Input('task') task: PTASK;
+    @Output() showMyTasks: EventEmitter<string> = new EventEmitter<string>();
 
     priorities: SelectItem[];
     selectedPriority: Priority;
@@ -34,7 +36,8 @@ export class PtaskComponent implements OnInit {
 
     constructor(private pTaskService: PTASKService,
       private messageService: MessageService,
-      private fb: FormBuilder) {
+      private fb: FormBuilder,
+      private confirmationService: ConfirmationService ) {
           this.updateForm = this.fb.group({
             'desc': new FormControl('', Validators.required),
             'project': new FormControl('', Validators.required),
@@ -46,17 +49,17 @@ export class PtaskComponent implements OnInit {
           });
       }
 
-    showSuccessMessage() {
+    showSuccessMessage(message: string) {
       this.messageService.add({
         severity: 'success',
-        summary: 'Task Updated Successfully.'
+        summary: message
       });
     }
 
-    showErrorMessage() {
+    showErrorMessage(message: string) {
       this.messageService.add({
         severity: 'error',
-        summary: 'Error updating task.'
+        summary: message
       });
     }
 
@@ -95,10 +98,10 @@ export class PtaskComponent implements OnInit {
 
       this.pTaskService.updateTask(taskToUpdate).subscribe(
         res => {
-          this.showSuccessMessage();
+          this.showSuccessMessage('Task Updated Successfully.');
           this.task = taskToUpdate;
         },
-        error => this.showErrorMessage(),
+        error => this.showErrorMessage('Error updating task.'),
         () => this.editable = false
       );
     }
@@ -116,6 +119,25 @@ export class PtaskComponent implements OnInit {
     taskToUpdate.createdBy = this.task.createdBy;
     taskToUpdate.createdDate = this.task.createdDate;
     return taskToUpdate;
+  }
+
+  confirmDelete() {
+    this.confirmationService.confirm({
+      message: 'Do you want to delete this task?',
+      header: 'Delete Confirmation',
+      icon: 'fa fa-trash',
+      accept: () => {
+          this.pTaskService.deleteTask(this.task.id).subscribe(
+            res => {
+              this.showSuccessMessage('Task deleted successfully');
+              this.showMyTasks.emit('Show my tasks');
+            },
+            error => this.showErrorMessage('Error while deleting task')
+          );
+        },
+      reject: () => {
+      }
+  });
   }
 
     onCancel() {
