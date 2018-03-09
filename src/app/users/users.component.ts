@@ -52,6 +52,13 @@ export class UsersComponent implements OnInit {
         // this.populateFilters();
     }
 
+    showMessage(message: string, type: string) {
+      this.msgSrv.add({
+        severity: type,
+        summary: message
+      });
+    }
+
     refresh() {
         this.pTaskService.getAllUsers().subscribe(
             (ul: UserList) => {
@@ -59,8 +66,8 @@ export class UsersComponent implements OnInit {
                 this.total = ul.total;
             },
             err => {
-                // this.msgSrv.showError('Failed to featch user information',
-                //     'Error! - Manage Users');
+                this.showMessage('Failed to featch user information',
+                    'error');
             });
     }
 
@@ -77,11 +84,11 @@ export class UsersComponent implements OnInit {
             accept: () => {
                 this.secSrv.deleteUser(user.id).subscribe(
                     (res: any) => {
-                        // this.msgSrv.showSuccess('User deletion successful');
-                        // this.refresh()
+                        this.showMessage('User deletion successful', 'success');
+                        this.refresh();
                     },
                     err => {
-                        // this.msgSrv.showError('Failed to delete user');
+                        this.showMessage('Failed to delete user', 'error');
                     }
                 );
             }
