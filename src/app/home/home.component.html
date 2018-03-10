@@ -1,9 +1,9 @@
 <div class="ui-g">
     <div class="ui-g-12 ui-md-2 ui-g-nopad">
         <app-side-bar
-        (showAllTasks)='displayAllTasks($event)'
-        (showMyTasks)='displayMyTasks($event)'
-        (showUserView)='showUserView($event)'
+        (showAllTasks)='displayAllTasks()'
+        (showMyTasks)='displayMyTasks()'
+        (showUserView)='showUserView()'
         ></app-side-bar>
     </div>
     <div class="ui-g-12 ui-md-10 ui-g-nopad">
@@ -15,7 +15,7 @@
              <ng-template let-task pTemplate="item" let-i="index">
               <app-ptask
                 [task]="task"
-                (showMyTasks)='displayMyTasks($event)'
+                (showMyTasks)='displayMyTasks()'
               ></app-ptask>
              </ng-template>
          </p-dataScroller></div>

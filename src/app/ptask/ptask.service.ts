@@ -13,7 +13,7 @@ export class PTASKService {
 
   constructor(private http: HttpClient) { }
 
-  private url = 'http://localhost:4200/dobby/api/v0/in/r2/dobby/tasks';
+  private url = 'dobby/api/v0/in/r2/dobby/tasks';
 
   getTasks() {
     return this.http.get<PTASK[]>(this.url);

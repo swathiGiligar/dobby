@@ -124,6 +124,6 @@ const appRoutes: Routes = [
 })
 export class AppModule { }
 
-function tokenGetter() {
+export function tokenGetter() {
   return localStorage.getItem('token');
 }

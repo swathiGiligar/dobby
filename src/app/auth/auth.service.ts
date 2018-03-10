@@ -26,7 +26,7 @@ export class AuthService {
     }
 
     login(creds: Credential) {
-        const url = 'http://localhost:4200/dobby/api/v0/login';
+        const url = 'dobby/api/v0/login';
         return this.http.post(url, creds).map(
             (resp: Result) => {
                 console.log(resp);
