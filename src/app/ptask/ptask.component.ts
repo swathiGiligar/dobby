@@ -6,6 +6,7 @@ import { Options, Priority, Users, Status } from '../utils/options';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ConfirmationService } from 'primeng/components/common/confirmationservice';
+import { Modes } from '../side-bar/side-bar.component';
 
 @Component({
   selector: 'app-ptask',
@@ -15,7 +16,10 @@ import { ConfirmationService } from 'primeng/components/common/confirmationservi
 export class PtaskComponent implements OnInit {
 
     @Input('task') task: PTASK;
-    @Output() showMyTasks: EventEmitter<string> = new EventEmitter<string>();
+    @Input('mode') mode: Modes;
+    @Output() showMyTasks: EventEmitter<Modes> = new EventEmitter<Modes>();
+
+    tasks: PTASK[];
 
     priorities: SelectItem[];
     selectedPriority: Priority;
@@ -65,6 +69,7 @@ export class PtaskComponent implements OnInit {
 
     ngOnInit() {
       this.setInitailValues();
+      this.tasks = [this.task];
     }
 
     setInitailValues() {
@@ -121,6 +126,10 @@ export class PtaskComponent implements OnInit {
     return taskToUpdate;
   }
 
+  closeView() {
+    this.showMyTasks.emit(this.mode);
+  }
+
   confirmDelete() {
     this.confirmationService.confirm({
       message: 'Do you want to delete this task?',
@@ -130,7 +139,7 @@ export class PtaskComponent implements OnInit {
           this.pTaskService.deleteTask(this.task.id).subscribe(
             res => {
               this.showSuccessMessage('Task deleted successfully');
-              this.showMyTasks.emit('Show my tasks');
+              this.showMyTasks.emit(this.mode);
             },
             error => this.showErrorMessage('Error while deleting task')
           );

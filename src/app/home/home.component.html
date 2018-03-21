@@ -8,7 +8,43 @@
     </div>
     <div class="ui-g-12 ui-md-10 ui-g-nopad">
         <div [hidden]="!progressBar"><p-progressBar mode="indeterminate"></p-progressBar></div>
-        <div [hidden]="!taskView"><p-dataScroller [value]="tasks" [rows]="10">
+        <div *ngIf="detailedTaskView">
+            <app-ptask
+            [task]="selectedTask"
+            [mode]="mode"
+            (showMyTasks)='displayTasks($event)'
+          ></app-ptask>
+        </div>
+        <div *ngIf="userView"><app-users></app-users></div>
+        <div *ngIf="taskView">
+          <p-table [value]="tasks" [columns]="cols">
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                  <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                      {{col.header}}
+                      <p-sortIcon [field]="col.field"></p-sortIcon>
+                  </th>
+                  <th style="width:3em"></th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-task let-columns="columns">
+              <tr>
+                <td *ngFor="let col of columns">
+                      {{task[col.field]}}
+                </td>
+                <td>
+                    <button pButton
+                    icon="fas fa-chevron-circle-right"
+                    (click)="showDetailedTask(task)"
+                    title="Click for More"
+                    >
+                    </button>
+                </td>
+            </tr>
+            </ng-template>
+        </p-table>
+       </div>
+        <!-- <div [hidden]="!taskView"><p-dataScroller [value]="tasks" [rows]="10">
             <p-header>
                Scroll Down to Load More
              </p-header>
@@ -20,5 +56,5 @@
              </ng-template>
          </p-dataScroller></div>
          <div [hidden]="!userView"><app-users></app-users></div>
-    </div>
+    </div> -->
 </div>

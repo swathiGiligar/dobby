@@ -23,6 +23,7 @@ import {MessageService} from 'primeng/components/common/messageservice';
 import {ProgressBarModule} from 'primeng/progressbar';
 import {PaginatorModule} from 'primeng/paginator';
 import {DataTableModule} from 'primeng/datatable';
+import {TableModule} from 'primeng/table';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -97,6 +98,7 @@ const appRoutes: Routes = [
     ProgressBarModule,
     PaginatorModule,
     DataTableModule,
+    TableModule,
 
     MatFormFieldModule,
     MatInputModule,

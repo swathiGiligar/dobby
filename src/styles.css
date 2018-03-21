@@ -35,11 +35,36 @@ body{
   color: slategray;
 }
 
+.ui-table .ui-table-tbody > tr,
+.ui-datatable .ui-datatable-data > tr {
+  background:slategrey ;
+  color:#1d283a ;
+}
+
+
+.ui-table .ui-table-tbody > tr:nth-child(even),
+.ui-datatable tbody > tr.ui-widget-content.ui-datatable-odd {
+  background:darkgray ;
+  color:#1d283a ;
+}
+.ui-table .ui-table-thead > tr > th,
+.ui-datatable .ui-datatable-thead>tr>th {
+  border: 1px solid #D5D5D5;
+  background-color:#1d283a;
+  color: slategray;
+}
+
+.ui-widget-header {
+  border: 1px solid #D5D5D5;
+  background:#1d283a;
+  color: slategray;
+}
+
 .ui-widget-header .ui-button, .ui-widget-content .ui-button,
 .ui-widget.ui-button, .ui-button
-.ui-datatable .ui-cell-data{
-  background-color:slategray;
-  color:#1d283a;
+.ui-datatable .ui-cell-data {
+  background-color:slategray ;
+  color:#1d283a ;
   border: 1px solid black;
 }
 
@@ -47,4 +72,6 @@ body{
   min-width: 100%;
   width: max-content;
 }
+
+
 

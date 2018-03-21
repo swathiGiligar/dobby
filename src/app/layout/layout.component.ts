@@ -3,6 +3,7 @@ import { MessageService } from 'primeng/components/common/messageservice';
 import { Message } from 'primeng/api';
 import { Subscription } from 'rxjs/Subscription';
 import { AuthService } from '../auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-layout',
@@ -16,7 +17,8 @@ export class LayoutComponent {
   loggedInUser: string;
 
   constructor(private messageService: MessageService,
-      private auth: AuthService) {
+      private auth: AuthService,
+      public router: Router) {
     this.sub = this.messageService.messageObserver.subscribe((msg: Message) => {
   });
   this.loggedInUser = this.auth.user.firstName + ' ' + this.auth.user.lastName;
@@ -26,4 +28,7 @@ export class LayoutComponent {
       this.auth.logout();
   }
 
+  home() {
+    this.router.navigate(['/home']);
+  }
 }

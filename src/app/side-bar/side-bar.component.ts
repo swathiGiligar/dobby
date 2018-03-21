@@ -10,9 +10,11 @@ import { AuthService } from '../auth/auth.service';
 })
 export class SideBarComponent implements OnInit {
 
-  @Output() showAllTasks: EventEmitter<string> = new EventEmitter<string>();
-  @Output() showMyTasks: EventEmitter<string> = new EventEmitter<string>();
-  @Output() showUserView: EventEmitter<string> = new EventEmitter<string>();
+  @Output() showAllTasks: EventEmitter<Modes> = new EventEmitter<Modes>();
+  @Output() showMyTasks: EventEmitter<Modes> = new EventEmitter<Modes>();
+  @Output() showUserView: EventEmitter<Modes> = new EventEmitter<Modes>();
+
+  mode = Modes.MY_TASKS;
 
   items: MenuItem[];
 
@@ -31,7 +33,23 @@ export class SideBarComponent implements OnInit {
 
   onNotify() {
     this.display = false;
-    this.showAllTasks.emit('Show All Tasks');
+    switch (this.mode) {
+      case Modes.ALL_TASKS: {
+                              this.showAllTasks.emit(Modes.MY_TASKS);
+                              break;
+                            }
+      case Modes.MY_TASKS: {
+                            this.showMyTasks.emit(Modes.MY_TASKS);
+                              break;
+                            }
+      case Modes.USER_MGMT: {
+        this.showUserView.emit(Modes.USER_MGMT);
+          break;
+        }
+      default: {
+                this.showMyTasks.emit(Modes.MY_TASKS);
+              }
+    }
   }
 
   ngOnInit() {
@@ -43,10 +61,12 @@ export class SideBarComponent implements OnInit {
         this.showDialog();
       }},
       {label: 'My Tasks', icon: 'fas fa-tasks', command: (event) => {
-        this.showMyTasks.emit('Show My Tasks');
+        this.showMyTasks.emit(Modes.MY_TASKS);
+        this.mode = Modes.MY_TASKS;
       }},
       {label: 'All Tasks', icon: 'fas fa-tasks', command: (event) => {
-        this.showAllTasks.emit('Show All Tasks');
+        this.showAllTasks.emit(Modes.ALL_TASKS);
+        this.mode = Modes.ALL_TASKS;
       }},
       {label: 'Filters', icon: 'fas fa-filter', command: (event) => {
         this.showUnderConstructionMessage();
@@ -54,9 +74,16 @@ export class SideBarComponent implements OnInit {
       {label: 'Manage Users', icon: 'fas fa-user',
         visible: this.auth.isAdminUser(),
         command: (event) => {
-        this.showUserView.emit('Show USer View');
+        this.showUserView.emit(Modes.USER_MGMT);
+        this.mode = Modes.USER_MGMT;
       }}
     ];
   }
 
+}
+
+export enum Modes {
+  ALL_TASKS = 1,
+  MY_TASKS,
+  USER_MGMT
 }
