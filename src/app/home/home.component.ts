@@ -88,7 +88,7 @@ export class HomeComponent implements OnInit {
       { field: 'status', header: 'Status' },
       { field: 'priority', header: 'Priority' },
       { field: 'owner', header: 'Owner' },
-      { field: 'projectName', header: 'Project Name' },
+      // { field: 'projectName', header: 'Project Name' },
       // { field: 'dependencies', header: 'Dependencies' },
       // { field: 'additionalInfo', header: 'Additional Info' },
       // { field: 'createdBy', header: 'Created By' },

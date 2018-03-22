@@ -7,7 +7,9 @@
         ></app-side-bar>
     </div>
     <div class="ui-g-12 ui-md-10 ui-g-nopad">
+
         <div [hidden]="!progressBar"><p-progressBar mode="indeterminate"></p-progressBar></div>
+
         <div *ngIf="detailedTaskView">
             <app-ptask
             [task]="selectedTask"
@@ -15,7 +17,9 @@
             (showMyTasks)='displayTasks($event)'
           ></app-ptask>
         </div>
+
         <div *ngIf="userView"><app-users></app-users></div>
+
         <div *ngIf="taskView">
           <p-table [value]="tasks" [columns]="cols">
             <ng-template pTemplate="header" let-columns>
@@ -44,17 +48,4 @@
             </ng-template>
         </p-table>
        </div>
-        <!-- <div [hidden]="!taskView"><p-dataScroller [value]="tasks" [rows]="10">
-            <p-header>
-               Scroll Down to Load More
-             </p-header>
-             <ng-template let-task pTemplate="item" let-i="index">
-              <app-ptask
-                [task]="task"
-                (showMyTasks)='displayMyTasks()'
-              ></app-ptask>
-             </ng-template>
-         </p-dataScroller></div>
-         <div [hidden]="!userView"><app-users></app-users></div>
-    </div> -->
 </div>

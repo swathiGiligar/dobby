@@ -29,6 +29,8 @@ export class LayoutComponent {
   }
 
   home() {
+    console.log('Go To Home PLease');
+    this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['/home']);
   }
 }
