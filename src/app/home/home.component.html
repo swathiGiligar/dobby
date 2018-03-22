@@ -24,7 +24,10 @@
           <p-table [value]="tasks" [columns]="cols">
             <ng-template pTemplate="header" let-columns>
               <tr>
-                  <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                  <th
+                    *ngFor="let col of columns"
+                    [pSortableColumn]="col.field"
+                  >
                       {{col.header}}
                       <p-sortIcon [field]="col.field"></p-sortIcon>
                   </th>
@@ -32,9 +35,15 @@
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-task let-columns="columns">
-              <tr>
+              <tr [class]="'p-row-'+task.priority">
                 <td *ngFor="let col of columns">
                       {{task[col.field]}}
+                      <sup style="color:red"
+                        *ngIf="col.field === 'description'
+                        && (task.priority==='Critical'
+                        || task.priority==='High')">
+                        <i class="fa fas fa-exclamation"></i>
+                      </sup>
                 </td>
                 <td>
                     <button pButton

@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
   cols: any[];
   selectedTask: PTASK;
   mode = Modes.MY_TASKS;
+  pCol = 'p-low';
 
   constructor(private pTaskService: PTASKService,
     private auth: AuthService) { }

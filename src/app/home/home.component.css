@@ -3,3 +3,19 @@
   color:#1d283a;
   border: 1px solid black;
 }
+
+.p-row-Critical {
+  background: #5F9EA0 !important;
+}
+
+.p-row-High {
+  background: #708090 !important;
+}
+
+.p-row-Medium {
+  background:#B0C4DE !important;
+}
+
+.p-row-Low {
+  background: #D3D3D3 !important;
+}
