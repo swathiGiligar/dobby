@@ -16,14 +16,13 @@
         title="Delete"
       ></span>
         <span *ngIf="!editable">{{task.description}}</span>
-        <input
-          type="text"
+        <textarea
           value="{{task.description}}"
-          pInputText
+          pInputTextarea
           *ngIf="editable"
           [(ngModel)]="desc"
           formControlName = "desc"
-        />
+        ></textarea>
     </div>
     <div class="ui-g-12 ui-md-10">
             <div class="ui-g-2 ui-sm-12">Priority: </div>
@@ -117,15 +116,14 @@
             <div class="ui-g-4 ui-sm-12" *ngIf="!editable">
               {{task.additionalInfo}}
             </div>
-            <input
+            <textarea
               class="ui-g-4 ui-sm-12"
-              type="text"
               value="{{task.additionalInfo}}"
-              pInputText
+              pInputTextarea
               *ngIf="editable"
               [(ngModel)]="comments"
               formControlName = "comments"
-            />
+            ></textarea>
 
             <div class="ui-g-2 ui-sm-12" *ngIf="editable"></div>
             <div class="ui-g-4 ui-sm-12" *ngIf="editable"></div>

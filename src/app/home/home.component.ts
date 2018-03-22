@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
     private auth: AuthService) { }
 
   displayAllTasks() {
+    this.cols.push({field: 'owner', header: 'Owner'});
     this.showTaskView();
     this.progressBar = true;
     this.pTaskService.getTasks().subscribe(res => {
@@ -54,6 +55,9 @@ export class HomeComponent implements OnInit {
   }
 
   displayMyTasks() {
+    if (this.cols.length === 4) {
+      this.cols.pop();
+    }
     this.showTaskView();
     this.progressBar = true;
     const user = this.auth.user.firstName + ' ' + this.auth.user.lastName;
@@ -88,13 +92,14 @@ export class HomeComponent implements OnInit {
       { field: 'description', header: 'Description' },
       { field: 'status', header: 'Status' },
       { field: 'priority', header: 'Priority' },
-      { field: 'owner', header: 'Owner' },
+      // { field: 'owner', header: 'Owner' },
       // { field: 'projectName', header: 'Project Name' },
       // { field: 'dependencies', header: 'Dependencies' },
       // { field: 'additionalInfo', header: 'Additional Info' },
       // { field: 'createdBy', header: 'Created By' },
       // { field: 'createdDate', header: 'Created Date' }
   ];
+
     this.displayMyTasks();
   }
 }

@@ -4,14 +4,13 @@
       <span style="color:red">*</span>
     </div>
     <div class="ui-g-8 ui-sm-6">
-        <input
-          type="text"
+        <textarea
+          pInputTextarea
           [(ngModel)]="desc"
-          pInputText
           class='input-style'
           placeholder="Description"
           formControlName="desc"
-        >
+        ></textarea>
     </div>
 
     <div class="ui-g-4 ui-sm-12">Priority:
@@ -77,6 +76,7 @@
           [(ngModel)]="comments"
           placeholder="Additional Information"
           formControlName="comments"
+          class='input-style'
         ></textarea>
     </div>
 
