@@ -37,7 +37,10 @@ export class HomeComponent implements OnInit {
     private messageService: MessageService) { }
 
   displayAllTasks() {
-    this.cols.push({field: 'owner', header: 'Owner'});
+    if (this.cols.length === 2) {
+      this.cols.push({field: 'owner', header: 'Owner'});
+    }
+    this.sortStatus = 'UNS';
     this.showTaskView();
     this.progressBar = true;
     this.pTaskService.getTasks().subscribe(res => {
@@ -64,9 +67,10 @@ export class HomeComponent implements OnInit {
   }
 
   displayMyTasks() {
-    if (this.cols.length === 4) {
+    if (this.cols.length === 3) {
       this.cols.pop();
     }
+    this.sortStatus = 'UNS';
     this.showTaskView();
     this.progressBar = true;
     const user = this.auth.user.firstName + ' ' + this.auth.user.lastName;

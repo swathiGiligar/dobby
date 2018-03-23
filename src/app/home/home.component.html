@@ -43,7 +43,7 @@
                   class="cellStyle"
                   (click)="sortOnStatus()"
                   >Status&nbsp;&nbsp;&nbsp;&nbsp;
-                  <p-sortIcon [field]='status' *ngIf="sortStatus === 'UNS'"></p-sortIcon>
+                  <p-sortIcon *ngIf="sortStatus === 'UNS'"></p-sortIcon>
                   <span class="fa fas fa-sort-up" *ngIf="sortStatus === 'ASC'"></span>
                   <span class="fa fas fa-sort-down" *ngIf="sortStatus === 'DESC'"></span>
                   </th>
