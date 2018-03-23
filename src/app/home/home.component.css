@@ -1,7 +1,8 @@
 .cellStyle{
-  background-color:slategray;
-  color:#1d283a;
-  border: 1px solid black;
+  background-color:#1d283a !important;
+  color:slategray !important;
+  border: 1px solid white !important;
+  cursor: pointer !important;
 }
 
 .p-row-Critical {

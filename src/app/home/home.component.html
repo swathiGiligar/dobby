@@ -21,19 +21,36 @@
         <div *ngIf="userView"><app-users></app-users></div>
 
         <div *ngIf="taskView">
-          <p-table [value]="tasks" [columns]="cols">
+          <p-table
+            [value]="tasks"
+            [columns]="cols"
+            (onEditComplete)="saveChanges($event)"
+            (onEditInit)="initEdit($event)"
+            >
             <ng-template pTemplate="header" let-columns>
               <tr>
                   <th
                     *ngFor="let col of columns"
                     [pSortableColumn]="col.field"
+                    (click)="resetStatusHead()"
+                    [class]="sortOthers"
                   >
-                      {{col.header}}
-                      <p-sortIcon [field]="col.field"></p-sortIcon>
+                      {{col.header}}&nbsp;&nbsp;&nbsp;&nbsp;
+                      <p-sortIcon [field]="col.field" *ngIf="sortStatus === 'UNS'"></p-sortIcon>
+                      <span class="fa fas fa-sort" *ngIf="sortStatus != 'UNS'"></span>
+                  </th>
+                  <th
+                  class="cellStyle"
+                  (click)="sortOnStatus()"
+                  >Status&nbsp;&nbsp;&nbsp;&nbsp;
+                  <p-sortIcon [field]='status' *ngIf="sortStatus === 'UNS'"></p-sortIcon>
+                  <span class="fa fas fa-sort-up" *ngIf="sortStatus === 'ASC'"></span>
+                  <span class="fa fas fa-sort-down" *ngIf="sortStatus === 'DESC'"></span>
                   </th>
                   <th style="width:3em"></th>
               </tr>
             </ng-template>
+
             <ng-template pTemplate="body" let-task let-columns="columns">
               <tr [class]="'p-row-'+task.priority">
                 <td *ngFor="let col of columns">
@@ -44,6 +61,20 @@
                         || task.priority==='High')">
                         <i class="fa fas fa-exclamation"></i>
                       </sup>
+                </td>
+                <td [pEditableColumn]="task" [pEditableColumnField]="task.status">
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <p-dropdown
+                            [(ngModel)]="status"
+                              [options]="statuses"
+                            >
+                            </p-dropdown>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{task.status}}
+                        </ng-template>
+                    </p-cellEditor>
                 </td>
                 <td>
                     <button pButton
